@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payslip - {{ data.name }}</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            font-size: 12px;
+            margin: 0;
+            
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            table-layout: fixed;
+
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 4px 6px;
+            text-align: left;
+            word-wrap: break-word;
+        }
+        .header {
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid #000;
+            border-bottom: none;
+            background: #fff;
+            padding: 8px 0;
+        }
+        .company-header {
+            text-align: center;
+            font-size: 14px;
+            
+            line-height: 1.5;
+            border: 1px solid #000;
+            border-bottom: none;
+            padding: 6px;
+        }
+        .company-name {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .right {
+            text-align: right;
+        }
+        .left {
+            text-align: left;
+        }
+        .center {
+            text-align: center;
+        }
+        .section-title {
+            background: #ccc;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #000;
+        }
+        .gray-bg {
+            background: #f2f2f2;
+        }
+        .no-border {
+            border: none !important;
+        }
+         tr.no-border td {
+            border: none !important;
+        }
+        .container {
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 16px;
+}
+        
+    
+  
+
+
+    </style>
+</head>
+<body>
+  <div class="container">
+    <table style="width: 100%; border: 1px solid #000; border-collapse: collapse; margin-bottom: 0;">
+    <tr>
+        <td colspan="8" class="company-header" style="text-align: center;">
+            <span class="company-name">{{ data.company_name }}</span><br>
+            {{ data.company_address }}
+            
+        </td>
+    </tr>
+    <tr>
+        <td colspan="8" class="header" style="text-align: center; font-weight: bold;">
+            Consultant Payment Slip for the month of {{ data.month }}
+        </td>
+    </tr>
+    <tr>
+        <!-- Left Section: Name, Joining Date, Location, Pay Days -->
+        <td colspan="4" style="vertical-align: top; border: 1px solid black; padding: 5px;">
+            <table style="width: 100%; border: none; border-collapse: collapse;">
+                <tr>
+                    <td class="no-border bold">Name:</td>
+                    <td class="no-border">{{ data.vendor_name }}</td>
+                </tr>
+                <tr>
+                    <td class="no-border bold">Joining Date:</td>
+                    <td class="no-border">{{ data.contract_start_date }}</td>
+                </tr>
+                <tr>
+                    <td class="no-border bold">Location:</td>
+                    <td class="no-border">{{ data.location }}</td>
+                </tr>
+                <tr>
+                    <td class="no-border bold">Effective Pay Days:</td>
+                    <td class="no-border">{{ data.pay_days }}</td>
+                </tr>
+            </table>
+        </td>
+
+        <!-- Right Section: Consultant Code, Bank, PAN -->
+        <td colspan="4" style="vertical-align: top; border: 1px solid black; padding: 5px;">
+            <table style="width: 100%; border: none; border-collapse: collapse;">
+                <tr>
+                    <td class="no-border bold">Consultant Code:</td>
+                    <td class="no-border">{{ data.vendor_code }}</td>
+                </tr>
+                <tr>
+                    <td class="no-border bold">Bank Name:</td>
+                    <td class="no-border">{{ data.bank_name }}</td>
+                </tr>
+                <tr>
+                    <td class="no-border bold">Bank Account No:</td>
+                    <td class="no-border">{{ data.bank_account }}</td>
+                </tr>
+                <tr>
+                    <td class="no-border bold">PAN Number:</td>
+                    <td class="no-border">{{ data.pan_no }}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<table>
+        <tr>
+            <th style="width:20%;" class="left">Gross Payment</th>
+            <th style="width:11.5%;" class="center">Master</th>
+            <th style="width:11.5%;" class="center">Amount</th>
+            <th style="width:25%;" class="left">Deductions</th>
+            <th style="width:20%;" class="center">Amount</th>
+        </tr>
+        <tr>
+            <td class="">Fee</td><td class="right">{{ data.monthly_fee }}</td><td class="right">{{ data.total_fee }}</td> 
+            <td class="">TDS</td><td class="right">{{ data.tds_10 }}</td></tr> 
+        <tr>
+            <td class="">Other Payments</td><td></td><td class="right">{{ data.bonus }}</td> 
+            <td class="">Other Deduction</td><td class="right">{{ data.other_deduction }}</td> 
+        </tr>
+        <tr>
+            <td class="">Travel Reimbursement</td><td></td><td class="right">{{ data.travel_reimbursement }}</td> 
+            <td class="">Financial Pendency</td><td class="right">{{ data.financial_pendency }}</td> 
+        </tr>
+        <tr>
+            <td>&nbsp;</td><td></td><td></td>
+            <td class="">Advance</td><td class="right">{{ data.advance_recovery }}</td> 
+        </tr>
+        
+        <tr>
+            <td>&nbsp;</td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td class="bold">Total Payment</td><td></td><td class="right">₹ {{ data.total_gross }}</td><td class="bold">Total Deduction</td><td class="right">₹ {{ data.total_deductions }}</td> 
+        </tr>
+        <tr class="no-border">
+            <td colspan="3" class="bold">
+                Net Payment:
+                <span style="float: right;">₹ {{ data.net_payment }}</span>
+            </td>
+            <td colspan="2" class="bold"> {{ data.net_payment_words }} </td>
+        </tr>
+</table>
+<br>
+
+       
+
+       
+
+
+
+        
+
+   
+    <table>
+        <tr><td colspan="5" class="section-title">TDS Details</td></tr>
+        <tr>
+            <th class="center" style="width:25%;">Description</th>
+            <th class="center" style="width:15%;">Gross</th>
+            <th class="center" style="width:15%;">Exempt</th>
+            <th class="center" style="width:15%;">Taxable</th>
+            <th class="center" style="width:15%;">TDS</th>
+        </tr>
+        <tr>
+            <td>Total Payment</td>
+            <td class="right">{{ data.total_gross }}</td> 
+            <td class="right">{{ data.travel_reimbursement }}</td> 
+            <td class="right">{{ data.total_payable }}</td> 
+            <td class="right">{{ data.tds_10 }}</td> 
+        </tr>
+    </table>
+    </div>
+
+</body>
+</html>

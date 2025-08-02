@@ -1,0 +1,8 @@
+Flask
+pandas
+openpyxl
+Jinja2
+WeasyPrint
+num2words
+
+

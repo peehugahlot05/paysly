@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paysly - Excel to PDF Consultant Payslips</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .feature-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .pulse-animation {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+      }
+
+      .floating {
+        animation: floating 3s ease-in-out infinite;
+      }
+
+      @keyframes floating {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 flex items-center">
+              <div
+                class="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center"
+              >
+                <svg
+                  class="w-5 h-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  ></path>
+                </svg>
+              </div>
+              <span class="ml-3 text-xl font-bold text-gray-900">Paysly</span>
+            </div>
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-8">
+              <a
+                href="#features"
+                class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium transition duration-200"
+                >Features</a
+              >
+              <a
+                href="#how-it-works"
+                class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium transition duration-200"
+                >How It Works</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg relative overflow-hidden">
+      <div class="absolute inset-0 bg-black opacity-10"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div class="text-center">
+          <h1
+            class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight"
+          >
+            Transform Excel to
+            <span class="text-yellow-300">Professional Payslips</span>
+          </h1>
+          <p
+            class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto leading-relaxed"
+          >
+            Upload your Excel workbook and instantly generate beautiful,
+            professional PDF payslips for consultants. Save hours of manual work
+            with our automated solution.
+          </p>
+          <form
+            action="/upload"
+            method="POST"
+            enctype="multipart/form-data"
+            class="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <input
+              type="file"
+              name="excel_file"
+              accept=".xlsx,.xls"
+              class="block w-full sm:w-auto border border-gray-300 p-3 rounded-lg text-sm bg-white shadow-sm focus:ring focus:ring-blue-200"
+              required
+            />
+            <button
+              type="submit"
+              class="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition duration-200 shadow-lg flex items-center"
+            >
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                ></path>
+              </svg>
+              Upload Excel File
+            </button>
+          </form>
+
+          <div class="mt-12 text-blue-100 text-sm">
+            <p>
+              ✓ No registration required ✓ Secure processing ✓ Instant results
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating Elements -->
+      <div class="absolute top-20 left-10 floating">
+        <div
+          class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center"
+        >
+          <svg
+            class="w-8 h-8 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div
+        class="absolute top-32 right-16 floating"
+        style="animation-delay: -1s"
+      >
+        <div
+          class="w-12 h-12 bg-yellow-300 bg-opacity-30 rounded-full flex items-center justify-center"
+        >
+          <svg
+            class="w-6 h-6 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">
+            Why Choose Paysly?
+          </h2>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            Streamline your payroll process with powerful features designed for
+            modern businesses
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="feature-card bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-xl"
+          >
+            <div
+              class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-6"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">
+              Lightning Fast
+            </h3>
+            <p class="text-gray-600">
+              Process hundreds of payslips in seconds. Upload your Excel file
+              and get professional PDFs instantly.
+            </p>
+          </div>
+
+          <div
+            class="feature-card bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-xl"
+          >
+            <div
+              class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-6"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">
+              100% Accurate
+            </h3>
+            <p class="text-gray-600">
+              Automated calculations ensure error-free payslips every time. No
+              more manual mistakes or corrections.
+            </p>
+          </div>
+
+          <div
+            class="feature-card bg-gradient-to-br from-purple-50 to-violet-100 p-8 rounded-xl"
+          >
+            <div
+              class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-6"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">
+              Secure & Private
+            </h3>
+            <p class="text-gray-600">
+              Your data is encrypted and processed securely. Files are
+              automatically deleted after processing.
+            </p>
+          </div>
+
+          <div
+            class="feature-card bg-gradient-to-br from-orange-50 to-red-100 p-8 rounded-xl"
+          >
+            <div
+              class="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mb-6"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h4"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">
+              Professional Design
+            </h3>
+            <p class="text-gray-600">
+              Beautiful, branded payslips that look professional and maintain
+              your company's image.
+            </p>
+          </div>
+
+          <div
+            class="feature-card bg-gradient-to-br from-teal-50 to-cyan-100 p-8 rounded-xl"
+          >
+            <div
+              class="w-12 h-12 bg-teal-600 rounded-lg flex items-center justify-center mb-6"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">
+              Easy to Use
+            </h3>
+            <p class="text-gray-600">
+              Simple drag-and-drop interface. No technical knowledge required.
+              Anyone can use it effortlessly.
+            </p>
+          </div>
+
+          <div
+            class="feature-card bg-gradient-to-br from-pink-50 to-rose-100 p-8 rounded-xl"
+          >
+            <div
+              class="w-12 h-12 bg-pink-600 rounded-lg flex items-center justify-center mb-6"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">
+              Cost Effective
+            </h3>
+            <p class="text-gray-600">
+              Save money on expensive payroll software. Pay only for what you
+              use with transparent pricing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
+          <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            Three simple steps to transform your Excel data into professional
+            payslips
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div
+              class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 pulse-animation"
+            >
+              <span class="text-2xl font-bold text-white">1</span>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              Upload Excel File
+            </h3>
+            <p class="text-gray-600 mb-6">
+              Simply drag and drop your Excel workbook containing consultant
+              data, or click to browse and select your file.
+            </p>
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <svg
+                class="w-12 h-12 text-green-600 mx-auto"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                ></path>
+              </svg>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 pulse-animation"
+              style="animation-delay: 0.5s"
+            >
+              <span class="text-2xl font-bold text-white">2</span>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              Automatic Processing
+            </h3>
+            <p class="text-gray-600 mb-6">
+              Our system automatically reads your data, performs calculations,
+              and formats everything into professional payslips.
+            </p>
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <svg
+                class="w-12 h-12 text-purple-600 mx-auto"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                ></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-6 pulse-animation"
+              style="animation-delay: 1s"
+            >
+              <span class="text-2xl font-bold text-white">3</span>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              Download PDF
+            </h3>
+            <p class="text-gray-600 mb-6">
+              Receive your professionally formatted PDF payslips instantly.
+              Ready to print or email to consultants.
+            </p>
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+              <svg
+                class="w-12 h-12 text-blue-600 mx-auto"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'9642ef4bf4ba5975',t:'MTc1MzM1NTA0Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
