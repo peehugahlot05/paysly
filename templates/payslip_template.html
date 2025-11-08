@@ -92,104 +92,127 @@
   <div class="container">
     <table style="width: 100%; border: 1px solid #000; border-collapse: collapse; margin-bottom: 0;">
     <tr>
-        <td colspan="8" class="company-header" style="text-align: center;">
+        <td colspan="2" class="company-header" style="text-align: center;">
             <span class="company-name">{{ data.company_name }}</span><br>
             {{ data.company_address }}
             
         </td>
     </tr>
     <tr>
-        <td colspan="8" class="header" style="text-align: center; font-weight: bold;">
+        <td colspan="2" class="header" style="text-align: center; font-weight: bold;">
             Consultant Payment Slip for the month of {{ data.month }}
         </td>
     </tr>
     <tr>
-        <!-- Left Section: Name, Joining Date, Location, Pay Days -->
-        <td colspan="4" style="vertical-align: top; border: 1px solid black; padding: 5px;">
-            <table style="width: 100%; border: none; border-collapse: collapse;">
-                <tr>
-                    <td class="no-border bold">Name:</td>
-                    <td class="no-border">{{ data.vendor_name }}</td>
-                </tr>
-                <tr>
-                    <td class="no-border bold">Joining Date:</td>
-                    <td class="no-border">{{ data.contract_start_date }}</td>
-                </tr>
-                <tr>
-                    <td class="no-border bold">Location:</td>
-                    <td class="no-border">{{ data.location }}</td>
-                </tr>
-                <tr>
-                    <td class="no-border bold">Effective Pay Days:</td>
-                    <td class="no-border">{{ data.pay_days }}</td>
-                </tr>
-            </table>
-        </td>
+    <!-- Left Section -->
+    <td style="width:50%; vertical-align: top; border: 1px solid black; padding: 5px;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr><td class="no-border bold">Consultant Code:</td><td class="no-border">{{ data.vendor_code }}</td></tr>
+            <tr><td class="no-border bold">Name:</td><td class="no-border">{{ data.vendor_name }}</td></tr>
+            <tr><td class="no-border bold">Contract Start Date:</td><td class="no-border">{{ data.contract_start_date }}</td></tr>
+            
+            {% if data.contract_end_date %}
+            <tr><td class="no-border bold">Contract End Date:</td><td class="no-border">{{ data.contract_end_date }}</td></tr>{% endif %}
+            <tr><td class="no-border bold">Location:</td><td class="no-border">{{ data.location }}</td></tr>
+        </table>
+    </td>
 
-        <!-- Right Section: Consultant Code, Bank, PAN -->
-        <td colspan="4" style="vertical-align: top; border: 1px solid black; padding: 5px;">
-            <table style="width: 100%; border: none; border-collapse: collapse;">
-                <tr>
-                    <td class="no-border bold">Consultant Code:</td>
-                    <td class="no-border">{{ data.vendor_code }}</td>
-                </tr>
-                <tr>
-                    <td class="no-border bold">Bank Name:</td>
-                    <td class="no-border">{{ data.bank_name }}</td>
-                </tr>
-                <tr>
-                    <td class="no-border bold">Bank Account No:</td>
-                    <td class="no-border">{{ data.bank_account }}</td>
-                </tr>
-                <tr>
-                    <td class="no-border bold">PAN Number:</td>
-                    <td class="no-border">{{ data.pan_no }}</td>
-                </tr>
-            </table>
-        </td>
+    <!-- Right Section -->
+    <td style="width:50%; vertical-align: top; border: 1px solid black; padding: 5px;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <tr><td class="no-border bold">Effective Pay Days:</td><td class="no-border">{{ data.pay_days }}</td></tr>
+            
+            {% if data.LOP_days %}
+            <tr><td class="no-border bold">LOP Days:</td><td class="no-border">{{ data.LOP_days }}</td></tr>{% endif %}
+            <tr><td class="no-border bold">Bank Name:</td><td class="no-border">{{ data.bank_name }}</td></tr>
+            <tr><td class="no-border bold">Bank Account No:</td><td class="no-border">{{ data.bank_account }}</td></tr>
+            <tr><td class="no-border bold">PAN Number:</td><td class="no-border">{{ data.pan_no }}</td></tr>
+        </table>
+    </td>
     </tr>
+
+
 </table>
 <table>
-        <tr>
-            <th style="width:20%;" class="left">Gross Payment</th>
-            <th style="width:11.5%;" class="center">Master</th>
-            <th style="width:11.5%;" class="center">Amount</th>
-            <th style="width:25%;" class="left">Deductions</th>
-            <th style="width:20%;" class="center">Amount</th>
-        </tr>
-        <tr>
-            <td class="">Fee</td><td class="right">{{ data.monthly_fee }}</td><td class="right">{{ data.total_fee }}</td> 
-            <td class="">TDS</td><td class="right">{{ data.tds_10 }}</td></tr> 
-        <tr>
-            <td class="">Other Payments</td><td></td><td class="right">{{ data.bonus }}</td> 
-            <td class="">Other Deduction</td><td class="right">{{ data.other_deduction }}</td> 
-        </tr>
-        <tr>
-            <td class="">Travel Reimbursement</td><td></td><td class="right">{{ data.travel_reimbursement }}</td> 
-            <td class="">Financial Pendency</td><td class="right">{{ data.financial_pendency }}</td> 
-        </tr>
-        <tr>
-            <td>&nbsp;</td><td></td><td></td>
-            <td class="">Advance</td><td class="right">{{ data.advance_recovery }}</td> 
-        </tr>
-        
-        <tr>
-            <td>&nbsp;</td><td></td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td><td></td><td></td><td></td><td></td>
-        </tr>
-        <tr>
-            <td class="bold">Total Payment</td><td></td><td class="right">₹ {{ data.total_gross }}</td><td class="bold">Total Deduction</td><td class="right">₹ {{ data.total_deductions }}</td> 
-        </tr>
-        <tr class="no-border">
-            <td colspan="3" class="bold">
-                Net Payment:
-                <span style="float: right;">₹ {{ data.net_payment }}</span>
-            </td>
-            <td colspan="2" class="bold"> {{ data.net_payment_words }} </td>
-        </tr>
+    <colgroup>
+        <col style="width:22%;">   <!-- Gross Payment -->
+        <col style="width:14%;">   <!-- Master -->
+        <col style="width:14%;">   <!-- Amount -->
+        <col style="width:30%;">   <!-- Deductions -->
+        <col style="width:20%;">   <!-- Amount -->
+    </colgroup>
+
+    <tr>
+        <th class="left">Gross Payment</th>
+        <th class="center">Master</th>
+        <th class="center">Amount</th>
+        <th class="left">Deductions</th>
+        <th class="center">Amount</th>
+    </tr>
+    {% if data.total_fee %}
+    <tr>
+        <td>Fee</td>
+        <td class="right">{{ data.monthly_fee }}</td>
+        <td class="right">{{ data.total_fee }}</td>
+        <td>TDS</td>
+        <td class="right">{{ data.tds_10 }}</td>
+    </tr>
+    {% endif %}
+    <!-- Other Payments and Other Deduction -->
+    {% if data.bonus or data.other_deduction %}
+    <tr>
+        <td>Other Payments</td>
+        <td></td>
+        <td class="right">{% if data.bonus %}{{ data.bonus }}{% endif %}</td>
+        <td>Other Deduction</td>
+        <td class="right">{% if data.other_deduction %}{{ data.other_deduction }}{% endif %}</td>
+    </tr>
+    {% endif %}
+    <!-- Travel Reimbursement and Financial Pendency -->
+    {% if data.travel_reimbursement or data.financial_pendency %}
+    <tr>
+        <td>Travel Reimbursement</td>
+        <td></td>
+        <td class="right">{% if data.travel_reimbursement %}{{ data.travel_reimbursement }}{% endif %}</td>
+        <td>Financial Pendency</td>
+        <td class="right">{% if data.financial_pendency %}{{ data.financial_pendency }}{% endif %}</td>
+    </tr>
+    {% endif %}
+    <!-- New Area Allowance and Advance -->
+    {% if data.new_area_allowance or data.advance_recovery %}
+    <tr>
+        <td>New Area Allowance</td>
+        <td></td>
+        <td class="right">{% if data.new_area_allowance %}{{ data.new_area_allowance }}{% endif %}</td>
+        <td>Advance</td>
+        <td class="right">{% if data.advance_recovery %}{{ data.advance_recovery }}{% endif %}</td>
+    </tr>
+    {% endif %}
+
+    <tr>
+        <td>&nbsp;</td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td><td></td><td></td><td></td><td></td>
+    </tr>
+
+    <tr>
+        <td class="bold">Total Payment</td>
+        <td></td>
+        <td class="right">₹ {{ data.total_gross }}</td>
+        <td class="bold">Total Deduction</td>
+        <td class="right">₹ {{ data.total_deductions }}</td>
+    </tr>
+
+    <tr class="no-border">
+        <td colspan="3" class="bold">
+            Net Payment:
+            <span style="float: right;">₹ {{ data.net_payment }}</span>
+        </td>
+        <td colspan="2" class="bold">{{ data.net_payment_words }}</td>
+    </tr>
 </table>
+
 <br>
 
        
